@@ -1,0 +1,17 @@
+from dotenv import dotenv_values
+from pydantic import BaseSettings
+
+config = dotenv_values(".env")
+
+
+class Settings(BaseSettings):
+    SECRET_KEY: str = config.get("SECRET_KEY")
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 8
+
+    PROJECT_NAME: str = "Sales Automation"
+
+    class Config:
+        case_sensitive = True
+
+
+settings = Settings()
